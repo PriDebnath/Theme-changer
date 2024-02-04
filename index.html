@@ -146,6 +146,9 @@
 
 <body>
 
+  <!-- Example card start -->
+
+
   <div class="card-container">
     <div class="card">
       <h3 class="header header-bg-color" contenteditable="true">
@@ -166,6 +169,14 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Example card end -->
+
+
+  <!-- Make theme start -->
+
+
   <div class="card-container">
     <div class="card">
 
@@ -210,6 +221,9 @@
       </div>
     </div>
   </div>
+  <!-- Make theme end -->
+
+  <!-- Theme List start -->
 
 
   <div class="card-container">
@@ -224,6 +238,7 @@
     </div>
   </div>
 
+  <!-- Theme list end -->
 
 
   <a href="https://www.linkedin.com/in/pritam-debnath-762019239">👋 Say Hello </a>
@@ -232,6 +247,7 @@
   <script>
     let themeList = [
       {
+        selected: false,
         canDelete: false,
         textColor: '#686868',
         primaryColor: '#31DFFF',
@@ -241,6 +257,7 @@
       }
   ,
       {
+        selected: true,
         canDelete: false,
         textColor: '#686868',
         primaryColor: '#FF6347', // Tomato
@@ -249,6 +266,7 @@
         headerBackgroundColor: '#FFA07A', // Light Salmon
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#7CFC00', // Lawn Green
@@ -257,6 +275,7 @@
         headerBackgroundColor: '#00FF7F', // Spring Green
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#9932CC', // Dark Orchid
@@ -265,6 +284,7 @@
         headerBackgroundColor: '#DDA0DD', // Plum
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#4682B4', // Steel Blue
@@ -273,6 +293,7 @@
         headerBackgroundColor: '#ADD8E6', // Light Blue
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#2E8B57', // Sea Green
@@ -281,6 +302,7 @@
         headerBackgroundColor: '#3CB371', // Medium Sea Green
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#FF4500', // Orange Red
@@ -289,6 +311,7 @@
         headerBackgroundColor: '#FF8C00', // Dark Orange
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#8B4513', // Saddle Brown
@@ -297,6 +320,7 @@
         headerBackgroundColor: '#CD853F', // Peru
   },
       {
+        selected: false,
         canDelete: true,
         textColor: '#686868',
         primaryColor: '#4B0082', // Indigo
@@ -305,6 +329,9 @@
         headerBackgroundColor: '#800080', // Purple
   },
 ];
+
+
+    let themeBox = document.getElementById('themeBox')
 
     // get stored colors
 
@@ -317,6 +344,14 @@
       themeList = storedThemeList
     }
 
+    // show selected theme after few seconds
+    themeList.map((theme, index) => {
+      if (theme.selected) {
+        setTimeout(() => {
+          handleApplyButton(theme, index)
+        }, 2000)
+      }
+    })
 
     let newTheme = {}
 
@@ -335,7 +370,6 @@
     // handle local storage end
 
 
-    let themeBox = document.getElementById('themeBox')
 
 
 
@@ -344,7 +378,6 @@
 
       themeBox.innerHTML = ''
       themeList.map((theme, index) => {
-
 
         let div = document.createElement('div')
         let primaryColorDiv = document.createElement('div')
@@ -362,15 +395,21 @@
 
         // parent div
 
+        if (theme.selected) {
+          div.style.borderWidth = '4px'
+        } else {
+          div.style.borderWidth = '1px'
+        }
+
         div.style.display = "flex"
         div.style.height = "5rem"
         div.style.margin = "1rem"
-        div.style.borderWidth = '2px'
+
         div.style.borderStyle = 'solid'
-        div.style.borderRadius = '0.3rem';
 
         div.style.borderColor = theme.primaryColor
 
+        div.style.borderRadius = '0.3rem';
 
 
         // primary 
@@ -406,7 +445,7 @@
         applyThemeButton.textContent = 'Apply Theme'
         applyThemeButton.style.background = theme.primaryColor
 
-        applyThemeButton.addEventListener('click', () => handleApplyButton(theme))
+        applyThemeButton.addEventListener('click', () => handleApplyButton(theme, index))
 
         // delete theme button 
         deleteThemeButton.textContent = 'Delete Theme'
@@ -447,7 +486,12 @@
     function handleAddTheme() {
       if (Object.keys(newTheme).length) {
         let theme = JSON.parse(JSON.stringify(newTheme)) // create a different copy so that it doesn't override existing instance
-        themeList.unshift({ ...theme, canDelete: true })
+        themeList.unshift({
+          ...theme,
+          canDelete: true,
+          selected: false
+
+        })
       }
 
       storeThemeListInLocalStorage(themeList)
@@ -456,7 +500,25 @@
 
 
 
-    function handleApplyButton(theme) {
+    function handleApplyButton(theme, index) {
+
+      themeList = themeList.map((theme, i) => {
+        if (index == i) {
+          return {
+            ...theme,
+            selected: true
+          }
+        }
+        else {
+          return {
+            ...theme,
+            selected: false
+          }
+        }
+      })
+
+      displayThemeList(themeList)
+      storeThemeListInLocalStorage(themeList)
 
       document.documentElement.style.setProperty('--textColor', theme.textColor)
 
