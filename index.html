@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Author" content="https://www.linkedin.com/in/pritam-debnath-762019239">
+
+  <title>Theme Changer By Pri </title>
+
+  <style>
+    * {
+      transition: 1s;
+    }
+
+    button {
+      white-space: nowrap;
+    }
+
+    :root {
+      --textColor: #686868;
+      --primaryColor: #31DFFF;
+      --secondaryColor: #98EFFF;
+      --backgroundColor: #DCF9FF;
+      --headerBackgroundColor: #B8F4FF;
+
+    }
+
+    body {
+      background: var(--backgroundColor);
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    /* common style start */
+
+    .text-color {
+      color: var(--textColor);
+    }
+
+    .bg-primary {
+      background: var(--primaryColor);
+    }
+
+    .bg-secondary {
+      background: var(--secondaryColor);
+    }
+
+    .header-bg-color {
+      background: var(--headerBackgroundColor);
+    }
+
+
+    .color-grey {
+      color: grey;
+    }
+
+    .px-4 {
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+    }
+
+    .fw-5 {
+      font-weight: 500;
+
+    }
+
+    /* common style end */
+
+    .field {
+      display: flex;
+      align-items: center;
+      padding: 0.2rem 0;
+    }
+
+    .card-container {
+      margin: 0.5rem;
+      min-width: 280px;
+      max-width: 400px;
+    }
+
+    .card {
+      border: 2px solid var(--primaryColor);
+      border-radius: 0.3rem;
+      overflow: hidden;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+      box-shadow: none;
+    }
+
+    .header {
+      padding: 1rem 1rem;
+      margin: 0;
+    }
+
+    .card-body {
+      padding: 1rem 1rem;
+
+    }
+
+
+
+    .action-button-container {
+      padding: 1rem 1rem;
+      padding-top: 0;
+    }
+
+    button {
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.3rem;
+      font-weight: 600;
+      border: none;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+
+    /* contact link start*/
+    a {
+      bottom: 3vh;
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 2rem auto;
+      color: skyblue;
+      box-shadow: 0.1rem 0.1rem 0.4rem skyblue;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+
+    a:hover {
+      box-shadow: 0.1rem 0.1rem 0.2rem skyblue;
+    }
+
+    /* contact link end*/
+  </style>
+</head>
+
+<body>
+
+  <div class="card-container">
+    <div class="card">
+      <h3 class="header header-bg-color" contenteditable="true">
+        Example Card
+      </h3>
+      <div class="card-body color-grey">
+        <p contenteditable="true" class="text-color">
+          Example card body text .
+          <br>
+          You can put your own words here
+        </p>
+      </div>
+      <div class="action-button-container">
+        <button class="bg-secondary" contenteditable="true">Secondary</button>
+        <button class="bg-primary" contenteditable="true">Primary</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-container">
+    <div class="card">
+
+      <h3 class="header header-bg-color">
+        Make Theme
+      </h3>
+
+      <div class="card-body">
+
+        <div class="field">
+          <input type="color" id="textColorInput" name="textColor" onchange="handleChangeColor(event)">
+          <label for="textColorInput" class="px-4 fw-5">Text Color</label>
+        </div>
+
+        <div class="field">
+          <input type="color" id="primaryColorInput" name="primaryColor" onchange="handleChangeColor(event)">
+          <label for="primaryColorInput" class="px-4 fw-5">Primary Color</label>
+        </div>
+
+        <div class="field">
+          <input type="color" id="secondaryColorInput" name="secondaryColor" onchange="handleChangeColor(event)">
+          <label for="secondaryColorInput" class="px-4 fw-5">Secondary Color</label>
+        </div>
+
+
+        <div class="field">
+          <input type="color" id="backgroundColorInput" name="backgroundColor" onchange="handleChangeColor(event)">
+          <label for="backgroundColorInput" class="px-4 fw-5">Background Color</label>
+        </div>
+
+
+        <div class="field">
+          <input type="color" id="headerBackgroundColorInput" name="headerBackgroundColor" onchange="handleChangeColor(event)">
+          <label for="headerBackgroundColorInput" class="px-4 fw-5">Header Color</label>
+        </div>
+
+
+      </div>
+
+      <div class="action-button-container">
+        <button class="bg-primary" onclick="handleAddTheme()">Add Theme</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card-container">
+    <div class="card">
+      <h3 class="header header-bg-color">
+        Themes
+      </h3>
+
+      <div id="themeBox">
+        <!-- JavaScript generated html will appear here -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <a href="https://www.linkedin.com/in/pritam-debnath-762019239">👋 Say Hello </a>
+
+
+  <script>
+    let themeList = [
+      {
+        canDelete: false,
+        textColor: '#686868',
+        primaryColor: '#31DFFF',
+        secondaryColor: '#98EFFF',
+        backgroundColor: '#DCF9FF',
+        headerBackgroundColor: '#B8F4FF',
+      }
+  ,
+      {
+        canDelete: false,
+        textColor: '#686868',
+        primaryColor: '#FF6347', // Tomato
+        secondaryColor: '#FFD700', // Gold
+        backgroundColor: '#FFEBCD', // Moccasin
+        headerBackgroundColor: '#FFA07A', // Light Salmon
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#7CFC00', // Lawn Green
+        secondaryColor: '#32CD32', // Lime Green
+        backgroundColor: '#98FB98', // Pale Green
+        headerBackgroundColor: '#00FF7F', // Spring Green
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#9932CC', // Dark Orchid
+        secondaryColor: '#8A2BE2', // Blue Violet
+        backgroundColor: '#E6E6FA', // Lavender
+        headerBackgroundColor: '#DDA0DD', // Plum
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#4682B4', // Steel Blue
+        secondaryColor: '#87CEEB', // Sky Blue
+        backgroundColor: '#B0E0E6', // Powder Blue
+        headerBackgroundColor: '#ADD8E6', // Light Blue
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#2E8B57', // Sea Green
+        secondaryColor: '#20B2AA', // Light Sea Green
+        backgroundColor: '#66CDAA', // Medium Aquamarine
+        headerBackgroundColor: '#3CB371', // Medium Sea Green
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#FF4500', // Orange Red
+        secondaryColor: '#FFA500', // Orange
+        backgroundColor: '#FFDAB9', // Peach Puff
+        headerBackgroundColor: '#FF8C00', // Dark Orange
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#8B4513', // Saddle Brown
+        secondaryColor: '#A52A2A', // Brown
+        backgroundColor: '#D2B48C', // Tan
+        headerBackgroundColor: '#CD853F', // Peru
+  },
+      {
+        canDelete: true,
+        textColor: '#686868',
+        primaryColor: '#4B0082', // Indigo
+        secondaryColor: '#8A2BE2', // Blue Violet
+        backgroundColor: '#9370DB', // Medium Purple
+        headerBackgroundColor: '#800080', // Purple
+  },
+];
+
+    // get stored colors
+
+    let storedThemeList = getStoredThemeList()
+
+    if (!storedThemeList) {
+      // if there is no stored theme use hardcoded theme list to start with
+      storedThemeList = themeList
+    } else {
+      themeList = storedThemeList
+    }
+
+
+    let newTheme = {}
+
+
+    // handle local storage start
+
+    function storeThemeListInLocalStorage(themeList) {
+      localStorage.setItem("themeList", JSON.stringify(themeList))
+
+    }
+
+    function getStoredThemeList() {
+      return JSON.parse(localStorage.getItem("themeList"))
+    }
+
+    // handle local storage end
+
+
+    let themeBox = document.getElementById('themeBox')
+
+
+
+
+    function displayThemeList(themeList) {
+
+      themeBox.innerHTML = ''
+      themeList.map((theme, index) => {
+
+
+        let div = document.createElement('div')
+        let primaryColorDiv = document.createElement('div')
+
+        let secondaryColorDiv = document.createElement('div')
+        let headerBackgroundColorDiv = document.createElement('div')
+
+        let backgroundColorDiv = document.createElement('div')
+
+        let actionContainer = document.createElement('div')
+        let applyThemeButton = document.createElement('button')
+        let deleteThemeButton = document.createElement('button')
+
+        // styles
+
+        // parent div
+
+        div.style.display = "flex"
+        div.style.height = "5rem"
+        div.style.margin = "1rem"
+        div.style.borderWidth = '2px'
+        div.style.borderStyle = 'solid'
+        div.style.borderRadius = '0.3rem';
+
+        div.style.borderColor = theme.primaryColor
+
+
+
+        // primary 
+        primaryColorDiv.style.background = theme.primaryColor
+        primaryColorDiv.style.width = "100%"
+
+        primaryColorDiv.style.background = theme.primaryColor
+
+        // secondary
+        secondaryColorDiv.style.width = "100%"
+        secondaryColorDiv.style.background = theme.secondaryColor
+
+
+        // header
+        headerBackgroundColorDiv.style.width = "100%"
+        headerBackgroundColorDiv.style.background = theme.headerBackgroundColor
+
+
+        // background
+        backgroundColorDiv.style.width = "100%"
+        backgroundColorDiv.style.background = theme.backgroundColor
+
+
+
+        // actionContainer
+
+        actionContainer.style.padding = '0.5rem'
+        actionContainer.style.display = 'flex'
+        actionContainer.style.flexDirection = 'column'
+        actionContainer.style.justifyContent = 'space-around'
+
+        // apply button
+        applyThemeButton.textContent = 'Apply Theme'
+        applyThemeButton.style.background = theme.primaryColor
+
+        applyThemeButton.addEventListener('click', () => handleApplyButton(theme))
+
+        // delete theme button 
+        deleteThemeButton.textContent = 'Delete Theme'
+        deleteThemeButton.style.background = theme.secondaryColor
+        deleteThemeButton.style.color = theme.textColor
+        deleteThemeButton.disabled = !(theme.canDelete)
+
+
+        deleteThemeButton.addEventListener('click', () => handleDeleteButton(theme, index))
+
+        // appending to document
+
+        div.appendChild(primaryColorDiv)
+        div.appendChild(secondaryColorDiv)
+        div.appendChild(headerBackgroundColorDiv)
+        div.appendChild(backgroundColorDiv)
+
+
+        // put action button in action container
+        actionContainer.appendChild(applyThemeButton)
+        actionContainer.appendChild(deleteThemeButton)
+        div.appendChild(actionContainer)
+
+        themeBox.appendChild(div)
+      })
+    }
+
+
+    displayThemeList(themeList)
+
+
+    function handleChangeColor(event) {
+      newTheme[event?.target?.name] = event.target.value || 'black'
+    }
+
+    // handle action buttons start
+
+    function handleAddTheme() {
+      if (Object.keys(newTheme).length) {
+        let theme = JSON.parse(JSON.stringify(newTheme)) // create a different copy so that it doesn't override existing instance
+        themeList.unshift({ ...theme, canDelete: true })
+      }
+
+      storeThemeListInLocalStorage(themeList)
+      displayThemeList(themeList)
+    }
+
+
+
+    function handleApplyButton(theme) {
+
+      document.documentElement.style.setProperty('--textColor', theme.textColor)
+
+      document.documentElement.style.setProperty('--primaryColor', theme.primaryColor)
+
+      document.documentElement.style.setProperty('--secondaryColor', theme.secondaryColor)
+
+      document.documentElement.style.setProperty('--headerBackgroundColor', theme.headerBackgroundColor)
+
+      document.documentElement.style.setProperty('--backgroundColor', theme.backgroundColor)
+
+    }
+
+    function handleDeleteButton(theme, index) {
+
+      themeList.splice(index, 1)
+      storeThemeListInLocalStorage(themeList)
+
+      displayThemeList(themeList)
+    }
+
+
+    // handle action buttons end
+  </script>
+
+</body>
+
+</html>
