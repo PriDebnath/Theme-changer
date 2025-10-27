@@ -1,5 +1,3 @@
-
-
 # 🔴 Demo
 
 ## 🖼️ Screenshot
@@ -10,7 +8,7 @@
 
 ## 🎥 Video
 
-https://github.com/user-attachments/assets/a072f59b-f487-4375-840a-6ec3dd64c952
+https://github.com/user-attachments/assets/c2614901-c1cd-427b-8577-4dc9e6c8e982
 
 
 ⬇️[Demo Video Download](videos/theme-changer.mp4)
@@ -18,3 +16,5 @@ https://github.com/user-attachments/assets/a072f59b-f487-4375-840a-6ec3dd64c952
 
 ## ↗️ Link
 https://pridebnath.github.io/Theme-changer
+
+---
