@@ -1,12 +1,12 @@
-# 🔴 Demo
+## 🔴 Demo
 
-## 🖼️ Screenshot
+### 🖼️ Screenshot
 
 <a href="https://pridebnath.github.io/Theme-changer"><img src="images/theme-changer.jpg"/>
 </a>
 
 
-## 🎥 Video
+### 🎥 Video
 
 https://github.com/user-attachments/assets/c2614901-c1cd-427b-8577-4dc9e6c8e982
 
@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/c2614901-c1cd-427b-8577-4dc9e6c8e982
 ⬇️[Demo Video Download](videos/theme-changer.mp4)
 
 
-## ↗️ Link
+### ↗️ Link
 https://pridebnath.github.io/Theme-changer
 
 ---
