@@ -2,7 +2,7 @@
 
 ### 🖼️ Screenshot
 
-<a href="https://pridebnath.github.io/Theme-changer"><img src="images/theme-changer.jpg"/>
+<a href="https://pridebnath.github.io/Theme-changer"><img height ="480" src="images/theme-changer.jpg"/>
 </a>
 
 
